@@ -12,12 +12,13 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
-      - ruby/bundle-install
+      - ruby/install-deps:
+          with-cache: false
   test:
     docker:
       - image: cimg/ruby:2.7.3-node
     steps:
-      - ruby/bundle-install
+      - ruby/install-deps
       - ruby/rspec-test
 
 workflows:
