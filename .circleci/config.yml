@@ -17,6 +17,7 @@ jobs:
     docker:
       - image: cimg/ruby:2.7.3-node
     steps:
+      - ruby/install-deps
       - ruby/rspec-test
 
 workflows:
