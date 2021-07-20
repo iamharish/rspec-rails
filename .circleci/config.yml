@@ -27,7 +27,7 @@ jobs:
           command: bundle lock --add-platform x86_64-linux
       - run:
           name: Install sqlite3         
-          command: gem install sqlite3 -v '1.4.2' --source 'https://rubygems.org/'       
+          command: rake Gemfile-sqlite-dependencies     
       - ruby/install-deps:
           bundler-version: 2.2.15
       - ruby/rspec-test
