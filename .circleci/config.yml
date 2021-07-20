@@ -22,11 +22,11 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
-      - ruby/install-deps:
-          bundler-version: 2.2.15
       - run:
           name: Lock platform
           command: bundle lock --add-platform x86_64-linux
+      - ruby/install-deps:
+          bundler-version: 2.2.15
       - ruby/rspec-test
 
 workflows:
