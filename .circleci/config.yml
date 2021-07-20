@@ -13,7 +13,7 @@ jobs:
           name: Which bundler?
           command: bundle -v
       - ruby/install-deps:
-          with-cache: false
+          bundler-version: 1.17.2
   test:
     docker:
       - image: cimg/ruby:2.7.3-node
