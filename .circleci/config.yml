@@ -1,0 +1,41 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@1.1.4
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.6.3-stretch-node
+    executor: ruby/default
+    steps:
+      - checkout
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      - ruby/install-deps:
+          bundler-version: 1.17.2
+  test:
+    docker:
+      - image: cimg/ruby:2.7.3-node
+    steps:
+      - checkout
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      - run:
+          name: Lock platform
+          command: bundle lock --add-platform x86_64-linux
+      - run:
+          name: Install sqlite3         
+          command: rake Gemfile-sqlite-dependencies     
+      - ruby/install-deps:
+          bundler-version: 2.2.15
+      - ruby/rspec-test
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
